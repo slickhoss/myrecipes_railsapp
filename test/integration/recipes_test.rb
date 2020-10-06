@@ -26,6 +26,7 @@ class RecipesTest < ActionDispatch::IntegrationTest
     assert_match @recipe1.name, response.body
     assert_select 'a[href=?]', edit_recipe_path(@recipe1), text: 'Edit'
     assert_select 'a[href=?]', recipe_path(@recipe1), text: 'Delete'
+    assert_select 'a[href=?]', recipes_path, text: 'Home'
   end
 
   test 'should get recipes new page' do
