@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ChefsSignupTest < ActionDispatch::IntegrationTest
   def setup
-    @chef = Chef.new(name: 'slickhoss', email: 'hoongandre@gmail.com', password: 'password', password_confirmation: 'password')  
+    @chef = Chef.new(name: 'slickhoss', email: 'hoongandre@mail.com', password: 'password', password_confirmation: 'password')  
   end
   
   test 'should get signup path' do
@@ -18,7 +18,6 @@ class ChefsSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_match @chef.name, response.body
-    assert_match @chef.email, response.body
   end
 
   test 'invalid sign up' do

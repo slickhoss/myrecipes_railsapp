@@ -11,7 +11,6 @@ class ChefsController < ApplicationController
         @chef = Chef.new(chef_params)
         if @chef.save
             flash[:success] = "Welcome #{@chef.name} to MYRECIPES App"
-
             redirect_to chef_path(@chef)
         else
             render 'new'
