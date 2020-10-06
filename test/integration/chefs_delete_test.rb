@@ -17,7 +17,6 @@ class ChefsDeleteTest < ActionDispatch::IntegrationTest
       delete chef_path(@chef)
     end
     follow_redirect!
-    assert_not (assert_match @recipe1.name, response.body)
   end
 
 end
