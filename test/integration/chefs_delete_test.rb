@@ -11,12 +11,11 @@ class ChefsDeleteTest < ActionDispatch::IntegrationTest
     assert_template 'chefs/show'
     assert_select 'a[href=?]', chef_path(@chef), text: 'Delete Profile'
     assert_difference 'Chef.count', -1 do
-      @chef.recipes.each do |r|
-        delete recipe_path(r)
-      end
       delete chef_path(@chef)
     end
     follow_redirect!
+    assert_template 'chefs/index'
+    assert_not flash.empty?
   end
 
 end

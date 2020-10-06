@@ -17,4 +17,9 @@ class ChefsTest < ActionDispatch::IntegrationTest
   assert_select 'a[href=?]', chef_path(@chef), @chef.name.capitalize
   end
 
+  test 'should delete chefs' do
+    get chefs_path
+    assert_template 'chefs/index'
+  end
+
 end

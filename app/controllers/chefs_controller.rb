@@ -40,10 +40,9 @@ class ChefsController < ApplicationController
 
     def destroy 
         @chef = Chef.find(params[:id])
-        @chef.recipes.destroy
         @chef.destroy
         flash[:success] = 'Profile was successfully deleted'
-        redirect_to recipes_path
+        redirect_to chefs_path
     end
 
     private
