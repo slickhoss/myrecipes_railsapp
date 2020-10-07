@@ -4,9 +4,10 @@ class ChefsDeleteTest < ActionDispatch::IntegrationTest
   def setup
     @chef = Chef.create(name: 'slickhoss', email: 'hoongandre@gmail.com', password: 'password', password_confirmation: 'password')
     @recipe1 = Recipe.create(name: 'breakfast', description: 'continental breakfast', chef: @chef)
+    sign_in_as(@chef, @chef.password)
   end
 
-  test 'succesful delete' do
+  test 'succesful delete chef' do
     get chef_path(@chef)
     assert_template 'chefs/show'
     assert_select 'a[href=?]', chef_path(@chef), text: 'Delete Profile'

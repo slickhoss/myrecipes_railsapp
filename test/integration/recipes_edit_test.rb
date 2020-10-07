@@ -4,9 +4,11 @@ class RecipesEditTest < ActionDispatch::IntegrationTest
   def setup
     @chef = Chef.create(name: 'slickhoss', email: 'slickhoss@example.com', password: 'password', password_confirmation: 'password')
     @recipe1 = Recipe.create(name: 'breakfast', description: 'continental breakfast', chef: @chef)
+    sign_in_as(@chef, @chef.password)
   end
 
   test 'valid view / route' do
+
     get edit_recipe_path(@recipe1)
     assert_response :success
   end

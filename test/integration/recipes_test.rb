@@ -1,11 +1,12 @@
 require 'test_helper'
 
 class RecipesTest < ActionDispatch::IntegrationTest
-  def setup
+  def setup    
     @chef = Chef.create(name: 'slickhoss', email: 'slickhoss@example.com', password: 'password', password_confirmation: 'password')
     @recipe1 = Recipe.create(name: 'breakfast', description: 'continental breakfast', chef: @chef)
     @recipe2 = @chef.recipes.build(name: 'lunch', description: 'club sandwhich')
     @recipe2.save
+    sign_in_as(@chef, @chef.password)
   end
 
   test 'should get recipes index page' do
@@ -21,6 +22,7 @@ class RecipesTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get recipe by id' do
+    sign_in_as(@chef, @chef.password)
     get recipe_path(@recipe1)
     assert_template 'recipes/show'
     assert_match @recipe1.name, response.body
@@ -35,6 +37,7 @@ class RecipesTest < ActionDispatch::IntegrationTest
   end
 
   test 'create new valid recipe' do
+    sign_in_as(@chef, @chef.password)
     get new_recipe_path
     assert_template 'recipes/new'
     name_of_recipe = 'pyrex'
