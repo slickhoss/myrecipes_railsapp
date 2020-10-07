@@ -55,7 +55,7 @@ class ChefsController < ApplicationController
         end
 
         def require_same_user
-            if  current_chef != @chef
+            if  current_chef != @chef && !current_chef.admin
                 flash[:danger] = 'Permission Denied'
                 redirect_to chef_path(current_chef)
             end

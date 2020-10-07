@@ -6,6 +6,7 @@ class ChefsShowTest < ActionDispatch::IntegrationTest
     @recipe1 = Recipe.create(name: 'breakfast', description: 'continental breakfast', chef: @chef)
     @recipe2 = @chef.recipes.build(name: 'lunch', description: 'club sandwhich')
     @recipe2.save
+    sign_in_as(@chef, @chef.password)
   end
 
   test 'test chef show route' do

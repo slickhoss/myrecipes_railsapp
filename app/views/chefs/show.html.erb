@@ -4,9 +4,12 @@
         <%= gravatar_for(@chef, size: 150) %>
     </div>
     <div>
-    <% if is_logged_in && current_chef == @chef %>
+    <% if is_logged_in && current_chef == @chef || current_chef.admin%>
         <%= link_to 'Edit Profile', edit_chef_path(@chef) %>
+        <% if current_chef.admin && current_chef == @chef %>
+        <% else %>
         <%= link_to 'Delete Profile', chef_path(@chef), method: :delete, data: {confirm: 'Are you sure'}, class: 'btn btn-xs btn-danger' %>
+        <% end %>
     <% end %>
     </div>
 </div>
