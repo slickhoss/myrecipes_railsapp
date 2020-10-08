@@ -31,12 +31,11 @@
 </div>
 
 <% if is_logged_in %>
-
     <div class='row'>
         <div class='col-md-8 col-md-offset-2'>
         <h3>Comments: </h3>
         <hr />    
-            <%= form_for([@recipe, @comment], :html => {class: "form-horizontal", role: "form"}) do |r| %>
+            <%= form_for([@recipe, @comment], remote: true, :html => {class: "form-horizontal", role: "form"}) do |r| %>
                 <div class='form-group'>
                     <div class='control-label col-md-2 pull-left'>
                         <%= r.label :description %>
@@ -61,7 +60,7 @@
     <div class='row'>
         <div class='col-md-8 col-md-offset-2'>
             <h3>Prior Comments:</h3>
-            <div id='messages'>
+            <div id="messages">
                 <%= render partial: 'comments/comments', object: @comment %>
             </div>
         </div>
