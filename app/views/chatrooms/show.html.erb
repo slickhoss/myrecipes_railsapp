@@ -1,0 +1,17 @@
+<%= render 'shared/page_title', title: 'Chatroom'%>
+
+<div class='row'>
+    <div class='col-md-8 center-block'>
+        <div class='messages' id='messages'>
+            <%# rails shortcut to display each from @messages using the messages/message partial%>
+            <%= render @messages %>
+        </div>
+        <div class='message-container'>
+            <%= form_for(@message, remote: true, :html => {class: 'form-horizontal', role: 'form'}) do |f| %>
+                <br>
+                <%= f.text_field :content, class: 'form-control', data: { behavior: "room_speaker" }, placehold: 'Say something!' %>
+                <%= f.submit 'Send', class: 'btn btn-primary', data: { send: "message" }%>
+            <% end %>
+        </div>
+    </div>
+</div>
