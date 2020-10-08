@@ -4,7 +4,7 @@
     <div class='col-md-12'>    
         <%= form_for(@recipe, :html => {class: "form-horizontal", role: "form"}) do |r| %>
             <div class='form-group'>
-                <div class='control-label col-md-2'>
+                <div class='control-label col-md-2 pull-left'>
                     <%= r.label :name %>
                 </div>
                 <div class='col-md-8'>
@@ -13,7 +13,7 @@
             </div>
 
             <div class='form-group'>
-                <div class='control-label col-md-2'>
+                <div class='control-label col-md-2 pull-left'>
                     <%= r.label :description %>
                 </div>
                 <div class='col-md-8'>
@@ -21,6 +21,15 @@
                 </div>
             </div>
 
+            <div class='form-group'>
+                <div class='row'>
+                    <div class='col-md-offset-2 col-md-8'>
+                        <%= r.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name do |i| %>
+                            <%= i.label(class: 'checkbox-inline input_checkbox') {i.check_box(class: 'checkbox') + i.text}%>
+                        <% end %>
+                    </div>
+            </div>
+                <br>
             <div class='form-group'>
                 <div class='col-md-offset-2 col-md-10'>
                     <%= r.submit class: 'btn btn-primary btn-lg btn-xlarge'%>

@@ -4,7 +4,7 @@
         <%= gravatar_for(@chef, size: 150) %>
     </div>
     <div>
-    <% if is_logged_in && current_chef == @chef || current_chef.admin%>
+    <% if is_logged_in && current_chef == @chef || current_chef.try(:admin)%>
         <%= link_to 'Edit Profile', edit_chef_path(@chef) %>
         <% if current_chef.admin && current_chef == @chef %>
         <% else %>
@@ -14,8 +14,12 @@
     </div>
 </div>
 
-<h4 align='center'> <%= @chef.name%>'s recipes</h4>
+<% if @chef.recipes.count > 0%>
+<h4 align='center'> <%= @chef.name.capitalize%>'s recipes</h4>
 <div align='center'>
     <%= will_paginate @chef_recipes %>
 </div>
 <%=render 'recipes/recipe', obj: @chef_recipes%>
+<% else %>
+<h4 align='center'> No recipes yet</h4>
+<% end %>

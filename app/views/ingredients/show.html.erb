@@ -1,0 +1,23 @@
+<%=  render 'shared/page_title', title: "Recipes with #{@ingredient.name}"%>
+<div class='row'>
+    <div class='col-md-4 col-md-offset-4 center'>
+    </div>
+    <div class='pull-right'>
+    <% if is_logged_in && current_chef.try(:admin)%>
+        <%= link_to 'Edit Ingredient', edit_ingredient_path(@ingredient) %>
+        <%= link_to 'Delete Ingredient', ingredient_path(@ingredient), method: :delete, data: {confirm: 'Are you sure'}, class: 'btn btn-xs btn-danger' %>
+    <% end %>
+    </div>
+</div>
+
+<% if @ingredient.recipes.count > 0%>
+<h4 align='center'> </h4>
+<div align='center'>
+
+<%= will_paginate @ingredient_recipes %>
+
+</div>
+<%=render 'recipes/recipe', obj: @ingredient.recipes%>
+<% else %>
+<h4 align='center'> No recipes yet</h4>
+<% end %>

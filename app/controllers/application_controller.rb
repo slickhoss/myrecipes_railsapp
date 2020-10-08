@@ -18,5 +18,15 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def require_admin
+        if !is_logged_in
+            flash[:warning] = 'Please login as admin to continue'
+            redirect_to login_path
+        end
+        if current_chef.try(:admin)
+            flash[:danger] = 'Permission Denied'
+            redirect_to ingredients_path
+        end
+    end
     
 end

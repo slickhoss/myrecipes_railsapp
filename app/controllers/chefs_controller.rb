@@ -38,10 +38,12 @@ class ChefsController < ApplicationController
     end
 
     def destroy 
+       #if current chef is deleting account have to log out after deleting chef
+       if(current_chef == @chef) 
+        session[:chef_id] = nil
+       end
         @chef.destroy
         flash[:success] = 'Profile was successfully deleted'
-       #have to log out after deleting chef
-        session[:chef_id] = nil
         redirect_to chefs_path
     end
 

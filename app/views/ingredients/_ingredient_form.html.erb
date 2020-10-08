@@ -1,0 +1,22 @@
+
+    <%= form_for(@ingredient, :html => {class: "form-horizontal", role: "form"}) do |i| %>
+            <div class='form-group'>
+                <div class='control-label col-md-2 pull-left'>
+                    <%= i.label :name %>
+                </div>
+                <div class='col-md-8'>
+                    <%= i.text_field :name, class: 'form-control', placeholder: 'Ingredient', autofocus: true%>
+                </div>
+            </div>
+
+
+            <div class='form-group'>
+                <div class='col-md-offset-2 col-md-10'>
+                    <%= i.submit class: 'btn btn-primary btn-lg btn-xlarge'%>
+                </div>
+            </div>
+        <% end %>
+
+        <div class='col-md-4 col-md-offset-4 colormatch'>
+            [ <%= link_to 'Cancel', recipes_path %> ]
+        </div>
